@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/injections/injection.dart';
 import '../../core/routes/routes.dart';
-import '../res/l10n/logic/locale_cubit.dart';
 import '../res/res.dart';
 
 class App extends StatelessWidget {

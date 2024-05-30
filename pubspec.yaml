@@ -18,7 +18,7 @@ dependencies:
 
   # 3rd party - UI
   cupertino_icons: ^1.0.6
-  flutter_svg: ^2.0.9
+  flutter_svg: ^2.0.10+1
 
   # 3rd party - Resources Manager
   flutter_gen: ^5.5.0+1
@@ -89,14 +89,15 @@ flutter_gen:
   fonts:
     enabled: true
     outputs:
-      class_name: AppFonts
+      class_name: FontsFamily
 
 flutter:
   uses-material-design: true
 
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/icons/badge/
+    - assets/icons/common/
+    - assets/images/logo/
 
   fonts:
     - family: NetflixSans
