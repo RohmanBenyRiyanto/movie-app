@@ -1,0 +1,30 @@
+<resources>
+    <!-- Primary colors -->
+    <color name="primary">#E50914</color> <!-- Netflix Red -->
+    <color name="primary_dark">#B81D24</color> <!-- Darker shade of Netflix Red -->
+    <color name="primary_light">#FF0A16</color> <!-- Lighter shade of Netflix Red -->
+
+    <!-- Secondary colors -->
+    <color name="secondary">#221F1F</color> <!-- Netflix Dark -->
+    <color name="secondary_dark">#141414</color> <!-- Darker shade of Netflix Dark -->
+    <color name="secondary_light">#333333</color> <!-- Lighter shade of Netflix Dark -->
+
+    <!-- Accent colors -->
+    <color name="accent">#E87C03</color> <!-- Netflix Orange -->
+    <color name="accent_dark">#B86100</color> <!-- Darker shade of Netflix Orange -->
+    <color name="accent_light">#FF9900</color> <!-- Lighter shade of Netflix Orange -->
+
+    <!-- Neutral colors -->
+    <color name="background">#000000</color> <!-- Background Black -->
+    <color name="surface">#121212</color> <!-- Surface Black -->
+    <color name="text_primary">#FFFFFF</color> <!-- Primary Text White -->
+    <color name="text_secondary">#B3B3B3</color> <!-- Secondary Text Grey -->
+    <color name="text_disabled">#666666</color> <!-- Disabled Text Grey -->
+    <color name="divider">#404040</color> <!-- Divider Grey -->
+
+    <!-- Additional colors -->
+    <color name="success">#28A745</color> <!-- Success Green -->
+    <color name="warning">#FFC107</color> <!-- Warning Yellow -->
+    <color name="error">#DC3545</color> <!-- Error Red -->
+    <color name="info">#17A2B8</color> <!-- Info Blue -->
+</resources>
