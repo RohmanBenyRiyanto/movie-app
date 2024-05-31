@@ -10,4 +10,6 @@ class AppConstans {
   Locale get localeID => const Locale('id', 'ID');
 
   List<Locale> get supportedLocales => <Locale>[localeEN, localeID];
+
+  Duration get animatedDuration => const Duration(milliseconds: 300);
 }

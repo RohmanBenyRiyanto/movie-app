@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../commons/themes/themes.dart';
 import '../../core/injections/injection.dart';
 import '../../core/routes/routes.dart';
 import '../res/res.dart';
@@ -26,6 +27,7 @@ class App extends StatelessWidget {
             scaffoldMessengerKey: snackKey,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
+            theme: appTheme,
             locale: state.locale,
           );
         },

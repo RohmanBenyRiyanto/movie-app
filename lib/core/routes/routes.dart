@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie/app/base/app_error.dart';
 
-import '../../features/home/home_page.dart';
+import '../../features/home/page/home_page.dart';
 
 part 'routes_path.dart';
 

@@ -10,11 +10,11 @@ import '../../core/routes/routes.dart';
 class ThemeHelper {
   static BuildContext? get _context => navKey.currentContext;
 
-  static ColorScheme getColorScheme() {
+  static ColorScheme get getColorScheme {
     return Theme.of(_context!).colorScheme;
   }
 
-  static TextTheme getTextTheme() {
+  static TextTheme get getTextTheme {
     return Theme.of(_context!).textTheme;
   }
 }

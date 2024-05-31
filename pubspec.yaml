@@ -19,6 +19,7 @@ dependencies:
   # 3rd party - UI
   cupertino_icons: ^1.0.6
   flutter_svg: ^2.0.10+1
+  infinite_carousel: ^1.1.1
 
   # 3rd party - Resources Manager
   flutter_gen: ^5.5.0+1
@@ -76,7 +77,6 @@ flutter_gen:
   assets:
     enabled: true
     outputs:
-      package_parameter_enabled: true
       class_name: AppAssets
 
   colors:
