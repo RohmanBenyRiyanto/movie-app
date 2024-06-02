@@ -1,6 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:dio/dio.dart';
 
 import '../../app/config/config.dart';
 import '../../app/res/res.dart';

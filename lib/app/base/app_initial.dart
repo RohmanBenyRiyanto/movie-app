@@ -4,10 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:movie/app/utils/utils.dart';
 
 import '../../core/injections/injection.dart';
 import '../../core/service/local_storage/local_storage.dart';
+import '../utils/utils.dart';
 
 abstract class AppInitial {
   AppInitial() {

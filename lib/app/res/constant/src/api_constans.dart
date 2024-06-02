@@ -22,7 +22,7 @@ class ApiConstans {
       };
 
   //? API VERSION
-  String get v3 => 'v3';
+  String get v3 => '3';
 
   //? API ENDPOINTS
 }

@@ -1,40 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:movie/app/base/app_error.dart';
 
-import '../../features/home/home_page.dart';
+import '../../app/base/app_error.dart';
+import '../../features/home/presentations/pages/home_page.dart';
+import '../../features/search_movie/presentations/pages/search_page.dart';
+import 'transitions/transition.dart';
 
 part 'routes_path.dart';
 
 final navKey = GlobalKey<NavigatorState>();
 final snackKey = GlobalKey<ScaffoldMessengerState>();
 
-class RoutingSetting {
-  factory RoutingSetting() => _instance;
+class AppRoute {
+  AppRoute._internal();
 
-  static final RoutingSetting _instance = RoutingSetting._internal();
+  factory AppRoute() => _instance;
+  static final AppRoute _instance = AppRoute._internal();
 
-  RoutingSetting._internal({
-    String? initialRoutes,
-  }) : initialRoute = initialRoutes ?? RoutePath.root;
+  static final GoRouter _router = GoRouter(
+    navigatorKey: navKey,
+    debugLogDiagnostics: true,
+    routes: routeBase,
+    errorBuilder: (BuildContext context, GoRouterState state) =>
+        const AppError(),
+  );
 
-  final String initialRoute;
+  static List<RouteBase> routeBase = <RouteBase>[
+    GoRoute(
+      path: RoutePath.root,
+      // builder: (BuildContext context, GoRouterState state) => const HomePage(),
+      pageBuilder: (context, state) => transition(
+        context: context,
+        state: state,
+        child: const HomePage(),
+        type: TransitionType.fade,
+      ),
+    ),
+    GoRoute(
+      path: RoutePath.search,
+      // builder: (BuildContext context, GoRouterState state) =>
+      //     const SearchPage(),),
+      pageBuilder: (context, state) => transition(
+        context: context,
+        state: state,
+        child: const SearchPage(),
+        type: TransitionType.slide,
+      ),
+    ),
+  ];
 
-  GoRouter get router => GoRouter(
+  static GoRouter getRoute(String initialLocation) => GoRouter(
         navigatorKey: navKey,
-        initialLocation: initialRoute,
         debugLogDiagnostics: true,
-        routes: <RouteBase>[
-          GoRoute(
-            path: RoutePath.root,
-            name: RoutePath.root,
-            builder: (BuildContext context, GoRouterState state) {
-              return const HomePage();
-            },
-            // pageBuilder: (context, state) =>
-            //     MaterialPage(child: const HomePage()),
-          ),
-        ],
-        errorBuilder: (context, state) => AppError(error: state.toString()),
+        routes: routeBase,
+        initialLocation: initialLocation,
+        errorBuilder: (BuildContext context, GoRouterState state) =>
+            const AppError(),
       );
+
+  static GoRouter get router => _router;
 }

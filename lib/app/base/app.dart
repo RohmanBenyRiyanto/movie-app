@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../commons/themes/themes.dart';
 import '../../core/injections/injection.dart';
 import '../../core/routes/routes.dart';
-import '../res/l10n/logic/locale_cubit.dart';
 import '../res/res.dart';
 
 class App extends StatelessWidget {
@@ -22,11 +22,12 @@ class App extends StatelessWidget {
         builder: (context, state) {
           return MaterialApp.router(
             title: 'Movie App',
-            routerConfig: RoutingSetting().router,
+            routerConfig: AppRoute.router,
             debugShowCheckedModeBanner: false,
             scaffoldMessengerKey: snackKey,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
+            theme: appTheme,
             locale: state.locale,
           );
         },
