@@ -4,6 +4,7 @@ import 'package:movie/commons/themes/themes.dart';
 
 import '../../../../commons/components/components.dart';
 import '../view_model/popular/popular_cubit.dart';
+import 'home_show_detail.dart';
 
 class HomePopular extends StatelessWidget {
   const HomePopular({super.key});
@@ -22,11 +23,19 @@ class HomePopular extends StatelessWidget {
           itemBuilder: (context, index) {
             return Padding(
               padding: EdgeInsets.only(right: index != -1 ? AppDimens.s16 : 0),
-              child: MovieCard(
-                title: data?.results?[index].title ?? "",
-                image: data?.results?[index].posterPath ?? "",
-                releaseDate: data?.results?[index].releaseDate ?? "",
-                rating: data?.results?[index].voteAverage ?? 0.0,
+              child: GestureDetector(
+                onTap: () {
+                  showMovieDetail(
+                    context,
+                    movie: data?.results?[index],
+                  );
+                },
+                child: MovieCard(
+                  title: data?.results?[index].title ?? "",
+                  image: data?.results?[index].posterPath ?? "",
+                  releaseDate: data?.results?[index].releaseDate ?? "",
+                  rating: data?.results?[index].voteAverage ?? 0.0,
+                ),
               ),
             );
           },

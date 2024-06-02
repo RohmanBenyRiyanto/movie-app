@@ -21,6 +21,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   infinite_carousel: ^1.1.1
   cached_network_image: ^3.3.1
+  youtube_player_flutter: ^9.0.1
 
   # 3rd party - Resources Manager
   flutter_gen: ^5.5.0+1
@@ -104,6 +105,8 @@ flutter:
     - assets/icons/badge/
     - assets/icons/common/
     - assets/images/logo/
+    - assets/images/common/
+    - assets/video/
 
   fonts:
     - family: NetflixSans

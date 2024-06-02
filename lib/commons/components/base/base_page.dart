@@ -2,14 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nested/nested.dart';
 
-abstract class BaseScrollPage extends StatefulWidget {
-  const BaseScrollPage({super.key});
+class BasePage extends StatefulWidget {
+  const BasePage({
+    super.key,
+    required this.body,
+    this.appBar,
+    this.onInit,
+    this.onDispose,
+    this.onLoadMore,
+    this.blocProviders,
+  });
+
+  final PreferredSizeWidget? Function(bool isScroll)? appBar;
+  final Widget body;
+  final VoidCallback? onInit;
+  final VoidCallback? onDispose;
+  final VoidCallback? onLoadMore;
+  final List<SingleChildWidget>? blocProviders;
 
   @override
-  BaseScrollPageState createState();
+  State<BasePage> createState() => _BasePageState();
 }
 
-abstract class BaseScrollPageState<T extends BaseScrollPage> extends State<T> {
+class _BasePageState extends State<BasePage> {
   final ScrollController _scrollController = ScrollController();
   bool isScroll = false;
 
@@ -17,34 +32,22 @@ abstract class BaseScrollPageState<T extends BaseScrollPage> extends State<T> {
   void initState() {
     super.initState();
     _scrollController.addListener(_scrollListener);
-    onInit();
+    widget.onInit?.call();
   }
 
   @override
   void dispose() {
     _scrollController.removeListener(_scrollListener);
     _scrollController.dispose();
-    onDispose();
+    widget.onDispose?.call();
     super.dispose();
-  }
-
-  void onInit() {
-    // Method to be overridden by subclasses for additional initialization.
-  }
-
-  void onDispose() {
-    // Method to be overridden by subclasses for additional disposal.
-  }
-
-  void onLoadMore() {
-    // Method to be overridden by subclasses for additional loading.
   }
 
   void _scrollListener() {
     if (_scrollController.offset >=
             _scrollController.position.maxScrollExtent &&
         !_scrollController.position.outOfRange) {
-      onLoadMore();
+      widget.onLoadMore?.call();
     }
 
     if (_scrollController.offset > 12.0 && !isScroll) {
@@ -60,27 +63,29 @@ abstract class BaseScrollPageState<T extends BaseScrollPage> extends State<T> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: blocProviders(context),
-      child: Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: buildAppBar(context, isScroll),
-        body: ListView(
-          controller: _scrollController,
-          physics: const AlwaysScrollableScrollPhysics(
-            parent: BouncingScrollPhysics(),
-          ),
-          children: [
-            buildBody(context, isScroll),
-          ],
+    if (widget.blocProviders != null) {
+      return MultiBlocProvider(
+        providers: widget.blocProviders ?? [],
+        child: _buildContent(),
+      );
+    } else {
+      return _buildContent();
+    }
+  }
+
+  Scaffold _buildContent() {
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: widget.appBar?.call(isScroll),
+      body: ListView(
+        controller: _scrollController,
+        physics: const AlwaysScrollableScrollPhysics(
+          parent: BouncingScrollPhysics(),
         ),
+        children: [
+          widget.body,
+        ],
       ),
     );
   }
-
-  List<SingleChildWidget> blocProviders(BuildContext context);
-
-  PreferredSizeWidget buildAppBar(BuildContext context, bool isScroll);
-
-  Widget buildBody(BuildContext context, bool isScroll);
 }

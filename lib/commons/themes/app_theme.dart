@@ -56,12 +56,11 @@ final ThemeData appTheme = ThemeData(
   inputDecorationTheme: const InputDecorationTheme(
     filled: true,
     fillColor: AppColor.surface,
-    errorBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: AppColor.primary),
-    ),
-    enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: AppColor.divider),
-    ),
+  ),
+  textSelectionTheme: TextSelectionThemeData(
+    cursorColor: AppColor.textPrimary,
+    selectionColor: AppColor.accent.withOpacity(0.3),
+    selectionHandleColor: AppColor.textPrimary,
   ),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
     backgroundColor: AppColor.accent,

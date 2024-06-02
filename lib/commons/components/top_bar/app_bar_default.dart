@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../app/res/assets.gen.dart';
 import '../../../app/res/res.dart';
@@ -29,6 +30,7 @@ class AppBarDefault extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final canPop = ModalRoute.of(context)?.canPop ?? false;
     return Material(
       color: isScroll ? Colors.transparent : backgroundColor,
       child: AppBar(
@@ -51,8 +53,14 @@ class AppBarDefault extends StatelessWidget implements PreferredSizeWidget {
               children: [
                 const SizedBox(width: AppDimens.s10),
                 ButtonIcon(
-                  onPressed: onLeadingIconPressed,
-                  iconData: leadingIcon,
+                  size: canPop ? AppDimens.s22 : null,
+                  onPressed: canPop
+                      ? () {
+                          context.pop();
+                        }
+                      : onLeadingIconPressed,
+                  iconData:
+                      canPop ? Icons.arrow_back_ios_new_rounded : leadingIcon,
                 ),
                 const SizedBox(width: AppDimens.paddingExtraSmall),
                 Text(

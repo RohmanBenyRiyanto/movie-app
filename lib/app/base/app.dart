@@ -22,7 +22,7 @@ class App extends StatelessWidget {
         builder: (context, state) {
           return MaterialApp.router(
             title: 'Movie App',
-            routerConfig: RoutingSetting().router,
+            routerConfig: AppRoute.router,
             debugShowCheckedModeBanner: false,
             scaffoldMessengerKey: snackKey,
             localizationsDelegates: AppLocalizations.localizationsDelegates,

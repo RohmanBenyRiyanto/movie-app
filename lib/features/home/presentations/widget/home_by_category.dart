@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../app/res/res.dart';
 import '../../../../commons/components/components.dart';
-import '../../../../commons/components/image/img.dart';
 import '../../../../commons/themes/themes.dart';
 import '../../../../core/service/network/network.dart';
 import '../../domain/entity/genres_entity.dart';
