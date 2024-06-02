@@ -1,5 +1,11 @@
+export 'animations/animatioin_list_item.dart';
 export 'base/base_page.dart';
 export 'bottom_sheet/bottom_sheet.dart';
 export 'buttons/button_icon.dart';
+export 'card/card_movie_small.dart';
+export 'card/movie_card.dart';
 export 'carouesel/carousel_dots.dart';
+export 'carouesel/carousel_horizontal.dart';
+export 'item_tile/movie_card_icon_tile.dart';
+export 'text/label.dart';
 export 'top_bar/app_bar_default.dart';

@@ -1,17 +1,22 @@
 import '../../../../core/service/network/network.dart';
 
-abstract class MovieListEntity implements ResponsePaging<Result> {
-  @override
-  Result? data;
-  @override
-  int? page;
-  @override
-  int? totalPages;
-  @override
-  int? totalResults;
+abstract class MovieListEntity {
+  final BaseDates? dates;
+  final int? page;
+  final List<ResultEntity>? results;
+  final int? totalPages;
+  final int? totalResults;
+
+  MovieListEntity({
+    this.dates,
+    this.page,
+    this.results,
+    this.totalPages,
+    this.totalResults,
+  });
 }
 
-abstract class Result {
+abstract class ResultEntity {
   final bool? adult;
   final String? backdropPath;
   final List<int>? genreIds;
@@ -21,13 +26,13 @@ abstract class Result {
   final String? overview;
   final double? popularity;
   final String? posterPath;
-  final DateTime? releaseDate;
+  final String? releaseDate;
   final String? title;
   final bool? video;
   final double? voteAverage;
   final int? voteCount;
 
-  Result({
+  ResultEntity({
     this.adult,
     this.backdropPath,
     this.genreIds,

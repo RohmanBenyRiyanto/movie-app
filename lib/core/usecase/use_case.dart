@@ -7,6 +7,6 @@ abstract class UseCase<Type, Params> {
 }
 
 // no param
-abstract class UseCaseNoParam<Type> {
+abstract class NoParamUseCase<Type> {
   Future<Either<Failure, Type>> execute();
 }

@@ -16,6 +16,8 @@ class AppBottomSheet implements PersistentBottomSheetController {
   final BoxConstraints? constraints;
   final bool isScrollControlled;
   final bool useSafeArea;
+  final bool fullScreen;
+  final String? title;
 
   AppBottomSheet({
     required this.context,
@@ -26,6 +28,8 @@ class AppBottomSheet implements PersistentBottomSheetController {
     this.constraints,
     this.isScrollControlled = true,
     this.useSafeArea = true,
+    this.fullScreen = false,
+    this.title,
   })  : _onClose = onClose,
         _closed = closed;
 
@@ -46,6 +50,8 @@ class AppBottomSheet implements PersistentBottomSheetController {
     BoxConstraints? constraints,
     bool isScrollControlled = true,
     bool useSafeArea = true,
+    bool fullScreen = false,
+    String? title,
   }) async {
     final completer = Completer<void>();
 
@@ -54,10 +60,12 @@ class AppBottomSheet implements PersistentBottomSheetController {
       isScrollControlled: isScrollControlled,
       context: context,
       backgroundColor: Colors.transparent,
-      constraints: constraints ?? _defaultConstraints(context),
+      constraints:
+          constraints ?? _defaultConstraints(context, fullScreen: fullScreen),
       shape: shape ?? _defaultShape,
       builder: (context) {
-        return _buildBottomSheetContent(context, builder, backgroundColor);
+        return _buildBottomSheetContent(context, builder, backgroundColor,
+            title: title);
       },
     ).whenComplete(() {
       completer.complete();
@@ -74,15 +82,22 @@ class AppBottomSheet implements PersistentBottomSheetController {
       constraints: constraints,
       isScrollControlled: isScrollControlled,
       useSafeArea: useSafeArea,
+      fullScreen: fullScreen,
+      title: title,
     );
   }
 
-  static BoxConstraints _defaultConstraints(BuildContext context) {
+  static BoxConstraints _defaultConstraints(
+    BuildContext context, {
+    bool fullScreen = false,
+  }) {
     return BoxConstraints(
       minWidth: 0,
       minHeight: 0,
       maxWidth: MediaQuery.of(context).size.width,
-      maxHeight: MediaQuery.of(context).size.height * 0.9,
+      maxHeight: fullScreen
+          ? MediaQuery.of(context).size.height
+          : MediaQuery.of(context).size.height * 0.9,
     );
   }
 
@@ -94,13 +109,22 @@ class AppBottomSheet implements PersistentBottomSheetController {
     );
   }
 
-  static Widget _buildBottomSheetContent(BuildContext context,
-      Widget Function(BuildContext context) builder, Color backgroundColor) {
+  static Widget _buildBottomSheetContent(
+    BuildContext context,
+    Widget Function(BuildContext context) builder,
+    Color backgroundColor, {
+    String? title,
+  }) {
     return IntrinsicHeight(
       child: Stack(
         children: [
           _buildBackdropFilter(),
-          _buildContentContainer(context, builder, backgroundColor),
+          _buildContentContainer(
+            context,
+            builder,
+            backgroundColor,
+            title: title,
+          ),
         ],
       ),
     );
@@ -122,8 +146,12 @@ class AppBottomSheet implements PersistentBottomSheetController {
     );
   }
 
-  static Widget _buildContentContainer(BuildContext context,
-      Widget Function(BuildContext context) builder, Color backgroundColor) {
+  static Widget _buildContentContainer(
+    BuildContext context,
+    Widget Function(BuildContext context) builder,
+    Color backgroundColor, {
+    String? title,
+  }) {
     return Padding(
       padding: const EdgeInsets.only(
         top: AppDimens.marginSmall,
@@ -134,7 +162,7 @@ class AppBottomSheet implements PersistentBottomSheetController {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _buildCloseButton(context),
+          _buildCloseButton(context, title: title),
           const SizedBox(height: AppDimens.s6),
           Expanded(child: SingleChildScrollView(child: builder(context))),
         ],
@@ -142,12 +170,23 @@ class AppBottomSheet implements PersistentBottomSheetController {
     );
   }
 
-  static Widget _buildCloseButton(BuildContext context) {
-    return SizedBox(
-      height: kToolbarHeight,
+  static Widget _buildCloseButton(BuildContext context, {String? title}) {
+    return Container(
+      height: AppDimens.s46,
+      margin: const EdgeInsets.only(top: AppDimens.s6),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: title != null
+            ? MainAxisAlignment.spaceBetween
+            : MainAxisAlignment.end,
         children: [
+          if (title != null) ...[
+            Text(
+              title,
+              style: AppTextStyle.label2Medium
+                  .copyWith(color: AppColor.textPrimary),
+            ),
+            const SizedBox(width: AppDimens.s6),
+          ],
           Transform.translate(
             offset: const Offset(10, 0),
             child: ButtonIcon(

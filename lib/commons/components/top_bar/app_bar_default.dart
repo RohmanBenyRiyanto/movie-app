@@ -1,8 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:movie/app/res/assets.gen.dart';
 
+import '../../../app/res/assets.gen.dart';
+import '../../../app/res/res.dart';
 import '../../themes/themes.dart';
 import '../components.dart';
 
@@ -36,7 +37,8 @@ class AppBarDefault extends StatelessWidget implements PreferredSizeWidget {
         titleSpacing: 0,
         automaticallyImplyLeading: false,
         centerTitle: true,
-        backgroundColor: isScroll ? Colors.transparent : backgroundColor,
+        backgroundColor:
+            isScroll ? AppColor.background.withOpacity(0.9) : backgroundColor,
         shadowColor: Colors.transparent,
         foregroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
@@ -77,7 +79,6 @@ class AppBarDefault extends StatelessWidget implements PreferredSizeWidget {
             ),
           ],
         ),
-        // Add blur effect if scrolled
         flexibleSpace: isScroll
             ? ClipRect(
                 child: BackdropFilter(
@@ -88,6 +89,14 @@ class AppBarDefault extends StatelessWidget implements PreferredSizeWidget {
                 ),
               )
             : null,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(isScroll ? 1 : 0),
+          child: AnimatedContainer(
+            duration: Constant.app.animatedDuration,
+            height: isScroll ? 0.5 : 0,
+            color: AppColor.secondaryLight.withOpacity(1),
+          ),
+        ),
       ),
     );
   }

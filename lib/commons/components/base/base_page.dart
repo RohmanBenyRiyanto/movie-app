@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nested/nested.dart';
 
-abstract class BasePage extends StatefulWidget {
-  const BasePage({super.key});
+abstract class BaseScrollPage extends StatefulWidget {
+  const BaseScrollPage({super.key});
 
   @override
-  BasePageState createState();
+  BaseScrollPageState createState();
 }
 
-abstract class BasePageState<T extends BasePage> extends State<T> {
+abstract class BaseScrollPageState<T extends BaseScrollPage> extends State<T> {
   final ScrollController _scrollController = ScrollController();
   bool isScroll = false;
 
@@ -34,7 +36,17 @@ abstract class BasePageState<T extends BasePage> extends State<T> {
     // Method to be overridden by subclasses for additional disposal.
   }
 
+  void onLoadMore() {
+    // Method to be overridden by subclasses for additional loading.
+  }
+
   void _scrollListener() {
+    if (_scrollController.offset >=
+            _scrollController.position.maxScrollExtent &&
+        !_scrollController.position.outOfRange) {
+      onLoadMore();
+    }
+
     if (_scrollController.offset > 12.0 && !isScroll) {
       setState(() {
         isScroll = true;
@@ -48,19 +60,25 @@ abstract class BasePageState<T extends BasePage> extends State<T> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: buildAppBar(context, isScroll),
-      body: ListView(
-        controller: _scrollController,
-        physics: const AlwaysScrollableScrollPhysics(
-          parent: BouncingScrollPhysics(),
+    return MultiBlocProvider(
+      providers: blocProviders(context),
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: buildAppBar(context, isScroll),
+        body: ListView(
+          controller: _scrollController,
+          physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics(),
+          ),
+          children: [
+            buildBody(context, isScroll),
+          ],
         ),
-        children: [
-          buildBody(context, isScroll),
-        ],
       ),
     );
   }
+
+  List<SingleChildWidget> blocProviders(BuildContext context);
 
   PreferredSizeWidget buildAppBar(BuildContext context, bool isScroll);
 

@@ -26,6 +26,7 @@ class AppDimens {
   static const double roundedExtraLarge = 32.0;
 
   // Icon Sizes
+  static const double iconExtraSmall = 12.0;
   static const double iconSmall = 16.0;
   static const double iconMedium = 24.0;
   static const double iconLarge = 32.0;
@@ -46,6 +47,7 @@ class AppDimens {
   static const double appBarHeight = 56.0;
   static const double cardElevation = 1.0;
 
+  static const double zero = 0.0;
   static const double s2 = 2.0;
   static const double s4 = 4.0;
   static const double s6 = 6.0;
@@ -60,4 +62,7 @@ class AppDimens {
   static const double s32 = 32.0;
   static const double s36 = 36.0;
   static const double s40 = 40.0;
+  static const double s44 = 44.0;
+  static const double s46 = 46.0;
+  static const double s48 = 48.0;
 }

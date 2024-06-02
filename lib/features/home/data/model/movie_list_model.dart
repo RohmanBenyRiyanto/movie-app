@@ -1,29 +1,50 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../../core/service/network/network.dart';
 import '../../domain/entity/movie_list_entity.dart';
 
 part 'movie_list_model.freezed.dart';
 part 'movie_list_model.g.dart';
 
 @freezed
-class NowPlayingModel with _$NowPlayingModel {
-  @JsonSerializable(explicitToJson: true)
-  @Implements<MovieListEntity>()
-  const factory NowPlayingModel({
+class MovieListModel extends MovieListEntity with _$MovieListModel {
+  @JsonSerializable(
+    explicitToJson: true,
+    fieldRename: FieldRename.snake,
+  )
+  const factory MovieListModel({
+    DatesModel? dates,
     int? page,
     List<ResultModel>? results,
     int? totalPages,
     int? totalResults,
-  }) = _NowPlayingModel;
+  }) = _MovieListModel;
 
-  factory NowPlayingModel.fromJson(Map<String, dynamic> json) =>
-      _$NowPlayingModelFromJson(json);
+  factory MovieListModel.fromJson(Map<String, dynamic> json) =>
+      _$MovieListModelFromJson(json);
 }
 
 @freezed
-class ResultModel with _$ResultModel {
-  @JsonSerializable(explicitToJson: true)
-  @Implements<Result>()
+class DatesModel extends BaseDates with _$DatesModel {
+  @JsonSerializable(
+    explicitToJson: true,
+    fieldRename: FieldRename.snake,
+  )
+  const factory DatesModel({
+    DateTime? maximum,
+    DateTime? minimum,
+  }) = _Dates;
+
+  factory DatesModel.fromJson(Map<String, dynamic> json) =>
+      _$DatesModelFromJson(json);
+}
+
+@freezed
+class ResultModel extends ResultEntity with _$ResultModel {
+  @JsonSerializable(
+    explicitToJson: true,
+    fieldRename: FieldRename.snake,
+  )
   const factory ResultModel({
     bool? adult,
     String? backdropPath,
@@ -34,7 +55,7 @@ class ResultModel with _$ResultModel {
     String? overview,
     double? popularity,
     String? posterPath,
-    DateTime? releaseDate,
+    String? releaseDate,
     String? title,
     bool? video,
     double? voteAverage,

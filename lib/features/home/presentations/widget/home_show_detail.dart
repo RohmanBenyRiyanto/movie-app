@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../app/res/res.dart';
-import '../../../commons/components/components.dart';
-import '../../../commons/themes/themes.dart';
+import '../../../../app/res/res.dart';
+import '../../../../commons/components/components.dart';
+import '../../../../commons/themes/themes.dart';
 import 'home_last_view.dart';
 
 Future<AppBottomSheet> showMovieDetail(BuildContext context) async {

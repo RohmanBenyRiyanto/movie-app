@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../commons/themes/themes.dart';
+import '../../../../commons/themes/themes.dart';
 
 class HomeLastView extends StatelessWidget {
   const HomeLastView({

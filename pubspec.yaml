@@ -20,6 +20,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter_svg: ^2.0.10+1
   infinite_carousel: ^1.1.1
+  cached_network_image: ^3.3.1
 
   # 3rd party - Resources Manager
   flutter_gen: ^5.5.0+1
@@ -47,8 +48,8 @@ dependencies:
   connectivity_plus: ^6.0.1
   freezed: ^2.4.6
   freezed_annotation: ^2.4.1
-  json_annotation: ^4.8.1
-  json_serializable: ^6.7.1
+  json_annotation: ^4.9.0
+  json_serializable: ^6.8.0
 
   # 3rd party - Routing
   go_router: ^14.1.4
@@ -56,6 +57,11 @@ dependencies:
   # 3rd party - Grouping
   dartz: ^0.10.1
   logger: ^2.3.0
+  nested: ^1.0.0
+
+dependency_overrides:
+  json_annotation: ">=4.9.0"
+  json_serializable: ">=6.8.0"
 
 dev_dependencies:
   # 3rd party

@@ -4,10 +4,10 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart' show Locale;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:movie/app/res/constant/constant.dart';
 
 import '../../../../core/injections/injection.dart';
 import '../../../../core/service/local_storage/local_storage.dart';
+import '../../constant/constant.dart';
 
 part 'locale_cubit.freezed.dart';
 part 'locale_state.dart';
