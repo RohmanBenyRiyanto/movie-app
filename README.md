@@ -55,6 +55,10 @@ Before running the app, make sure to download the `.env` file and place it in th
 Before running the app, generate necessary files:
 
 ```sh
+flutter gen-l10n
+```
+
+```sh
 dart run build_runner build --delete-conflicting-outputs
 ```
 
